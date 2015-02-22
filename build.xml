@@ -1,0 +1,34 @@
+<!--Build file for the Amazon Web Services S3 Client-->
+<project name="s3" default="compile">
+  <path id="aws.java.sdk.classpath">
+    <fileset dir="./aws-java-sdk-1.9.20.1/third-party" includes="**/*.jar"/>
+    <fileset dir="./aws-java-sdk-1.9.20.1/lib" includes="**/*.jar"/>
+    <pathelement path="./src/com/melusom2/sp2/"/>
+  </path>
+ 
+  <target name="clean">
+    <available file="META-INF" type="dir" property="META-INF.present" value="true"/>
+          <delete dir="META-INF" />
+    <delete>
+        <fileset dir="./src/com/melusom2/sp2/" includes="**/*.class" />
+        <fileset dir="./src/com/melusom2/sp2/" includes="**/*~" defaultexcludes="no" />
+		    <fileset dir="./src/com/melusom2/sp2/" includes="output.txt"/>
+    </delete>
+  </target>
+
+  <target name="compile" depends="clean">
+      <javac srcdir="./src/com/melusom2/sp2/" destdir="./src/com/melusom2/sp2/" classpathref="aws.java.sdk.classpath" includeantruntime="false" />
+  </target>
+
+  <target name="who">
+    <echo message="Michael Meluso Cloud Computing Project 2"/>
+  </target>
+  
+  <target name="run" depends="compile, who">
+	  <java classname="Driver" classpathref="aws.java.sdk.classpath" fork="true"/> 
+  </target>
+  
+  <target name="jar">
+	  <jar destfile="melusom2.jar" basedir="." excludes="*.pdf *.csv **/aws-java-sdk-1.9.20.1/**"/>
+  </target>
+</project> 

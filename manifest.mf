@@ -1,0 +1,4 @@
+Manifest-Version: 1.0
+Built-By: Michael Meluso
+Build-Jdk: 1.8.0_31
+Main-Class: src.com.melusom2.sp2.Driver
